@@ -7,14 +7,15 @@ class QuizBrain {
     Question('Jollof rice is delicious',  true),
     Question('Nigeria has the world power', false),
   ];
-  void (){
-
+  void nextS(){
+    if(_questionCounter < _questionBank.length - 1){
+      _questionCounter++;
+    }
   }
-  String getFulltext(int questionNumber){
-    if (questionNumber.Length )
-    return _questionBank[questionNumber].question;
+  String getFulltext(){
+    return _questionBank[_questionCounter].question;
   }
-  bool getAnswer(int questionNumber){
-    return _questionBank[questionNumber].answer;
+  bool getAnswer(){
+    return _questionBank[_questionCounter].answer;
   }
 }

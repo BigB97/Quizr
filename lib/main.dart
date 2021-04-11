@@ -42,7 +42,7 @@ class _QuizPageState extends State<QuizPage> {
             padding: EdgeInsets.all(10.0),
             child: Center(
               child: Text(
-                quizBrain.getFulltext(questionCounter),
+                quizBrain.getFulltext(),
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 25.0,
@@ -66,18 +66,22 @@ class _QuizPageState extends State<QuizPage> {
                 ),
               ),
               onPressed: () {
+                  quizBrain.nextS();
+                  bool correctAnswer = quizBrain.getAnswer();
+                  print((quizBrain.getAnswer()));
+                  print( quizBrain.getFulltext());
                 setState(() {
-                  questionCounter++;
-                  bool correctAnswer = quizBrain.getAnswer(questionCounter);
                   if (correctAnswer == true) {
                     scoreKeeper.add(
                       Icon(Icons.check_circle_sharp,
                           size: 30, color: Colors.green),
                     );
-                  } else {
+                  } else if (correctAnswer == false) {
                     scoreKeeper.add(
                       Icon(Icons.cancel, size: 30, color: Colors.red),
                     );
+                  } else {
+                    print('null');
                   }
                 });
               },
@@ -98,17 +102,19 @@ class _QuizPageState extends State<QuizPage> {
               ),
               onPressed: () {
                 setState(() {
-                  questionCounter++;
-                  bool correctAnswer2 = quizBrain.getAnswer(questionCounter);
+                  quizBrain.nextS();
+                  bool correctAnswer2 = quizBrain.getAnswer();
                   if (correctAnswer2 == false) {
                     scoreKeeper.add(
                       Icon(Icons.cancel, size: 30, color: Colors.red),
                     );
-                  } else {
+                  } else if (correctAnswer2 == true) {
                     scoreKeeper.add(
                       Icon(Icons.check_circle_sharp,
                           size: 30, color: Colors.green),
                     );
+                  } else {
+                    print('null');
                   }
                 });
               },
